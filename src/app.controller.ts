@@ -1,12 +1,22 @@
 import { Controller, Get } from '@nestjs/common';
 import { AppService } from './app.service';
+import { get } from 'http';
 
 @Controller()
 export class AppController {
-  constructor(private readonly appService: AppService) {}
+  constructor(
+    private readonly appService: AppService
+  ) {}
 
-  @Get()
-  getHello(): string {
-    return this.appService.getHello();
+  /**
+   * 서버 상태 체크
+   */
+  @Get('/heartbeat')
+  async heartbeat(): Promise<HeartBeatResponseDTO> {
+    return { status: 'alive' };
   }
+}
+
+export class HeartBeatResponseDTO {
+  status: 'alive' | 'died'
 }
