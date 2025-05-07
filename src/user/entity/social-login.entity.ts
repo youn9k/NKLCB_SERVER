@@ -8,6 +8,9 @@ export class SocialLoginEntity {
   @PrimaryGeneratedColumn()
   id: number;
 
+  @Column({ name: 'user_id', type: 'int', nullable: false })
+  userId: number;
+
   // 'apple', 'naver' 등
   @Column({ type: 'varchar', length: 50 })
   provider: SocialProvider;
