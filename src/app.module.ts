@@ -30,6 +30,7 @@ import { UserModule } from './user/user.module';
           SocialLoginEntity,
         ],
         synchronize: configService.get('DB_SYNC'),
+        supportBigNumbers: true,
       }),
     }),
     AuthModule, 
