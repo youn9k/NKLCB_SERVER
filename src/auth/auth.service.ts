@@ -159,7 +159,7 @@ export class AuthService {
     return DateTime.now()
       .setZone(timezone)
       .plus({ seconds: expiresIn })
-      .toMillis();
+      .toMillis() / 1000; // 초 단위로 변환
   }
 
   private async getDecodedRefreshToken(token: string): Promise<DecodedRefreshTokenDto> {
