@@ -67,7 +67,7 @@ export class AuthService {
 
     return {
       accessToken: accessToken,
-      expiresIn: await this.getTokenExpirationTime(),
+      expiredAt: await this.getTokenExpirationTime(),
       refreshToken: refreshToken,
     };
   }
@@ -83,7 +83,7 @@ export class AuthService {
 
     return {
       token: accessToken,
-      expiresIn: await this.getTokenExpirationTime(),
+      expiredAt: await this.getTokenExpirationTime(),
     };
   }
 

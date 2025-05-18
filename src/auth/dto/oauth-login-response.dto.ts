@@ -1,5 +1,5 @@
 export class OAuthLoginResponseDto {
   accessToken: string;
-  expiresIn: number;
+  expiredAt: number;
   refreshToken: string;
 }

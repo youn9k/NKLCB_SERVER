@@ -16,7 +16,7 @@ export class AuthController {
  * 로그인
  * 
  * @param body OAuth provider ex) 'naver', token
- * @returns AccessToken, RefreshToken, AccessTokenExpiresIn
+ * @returns AccessToken, RefreshToken, AccessTokenExpiredAt
  */
   @Post('/login')
   async loginWithOAuth(
