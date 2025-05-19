@@ -8,11 +8,11 @@ export class UserDto {
 
   name: string;
 
-  createdAt: Date;
+  createdAt: number;
 
-  updatedAt: Date;
+  updatedAt: number;
 
-  deletedAt?: Date;
+  deletedAt?: number;
 
   socialLogin: SocialLoginDto;
 
