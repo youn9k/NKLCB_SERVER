@@ -9,6 +9,7 @@ import { UserEntity } from './user/entity/user.entity';
 import { SocialLoginEntity } from './user/entity/social-login.entity';
 import { UserModule } from './user/user.module';
 import config from './common/config/config';
+import { UserTokenEntity } from './user/entity/user-token.entity';
 
 @Module({
   imports: [
@@ -29,6 +30,7 @@ import config from './common/config/config';
         database: configService.get('db.name'),
         entities: [
           UserEntity,
+          UserTokenEntity,
           SocialLoginEntity,
         ],
         synchronize: configService.get('db.sync'),
