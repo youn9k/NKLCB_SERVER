@@ -22,14 +22,14 @@ export class UserEntity {
   @Column({ type: 'boolean', default: false })
   emailVerified: boolean;
 
-  @CreateDateColumn({ name: 'created_at', type: 'timestamp' })
-  createdAt: Date;
+  @Column({ name: 'created_at', type: 'bigint', nullable: false })
+  createdAt: number;
 
-  @UpdateDateColumn({ name: 'updated_at', type: 'timestamp' })
-  updatedAt: Date;
+  @Column({ name: 'updated_at', type: 'bigint', nullable: false })
+  updatedAt: number;
 
-  @Column({ name: 'deleted_at', type: 'timestamp', nullable: true })
-  deletedAt?: Date;
+  @Column({ name: 'deleted_at', type: 'bigint', nullable: true })
+  deletedAt?: number;
 
   @OneToOne(() => SocialLoginEntity, (socialLogin) => socialLogin.user, {
     cascade: true,
