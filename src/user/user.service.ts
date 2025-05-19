@@ -29,7 +29,7 @@ export class UserService {
     private readonly configService: ConfigService,
   ) {}
 
-  async create(user: OauthUserDto): Promise<UserDto> {
+  async create(user: OauthUserDto): Promise<UserDto | null> {
     const qr = this.dataSource.createQueryRunner();
     await qr.connect();
     await qr.startTransaction();
@@ -107,7 +107,7 @@ export class UserService {
   async findByIdentifier(
     identifier: string,
     includeDeleted = false,
-  ): Promise<UserDto> {
+  ): Promise<UserDto | null> {
     const user = await this.userRepository.findOne({
       where: {
         socialLogin: { identifier },
@@ -115,21 +115,17 @@ export class UserService {
         deletedAt: !includeDeleted ? IsNull() : undefined,
       },
     });
-    if (user == null) throw new EntityNotFoundError('user not found');
-
-    return UserDto.from(user);
+  
+    return user ? UserDto.from(user) : null;
   }
 
-
-  async findByUserId(userId: number): Promise<UserDto> {
+  async findByUserId(userId: number): Promise<UserDto | null> {
     const user = await this.userRepository.findOne({
       where: { id: userId, deletedAt: IsNull() }
     });
-    if (user == null) throw new EntityNotFoundError('user not found');
 
-    return UserDto.from(user);
+    return user ? UserDto.from(user) : null;
   }
-
 
   async insertRefreshToken(
     userId: number,

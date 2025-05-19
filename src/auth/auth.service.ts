@@ -13,6 +13,7 @@ import { DateTime } from 'luxon';
 import { AccessTokenDto } from './dto/access-token.dto';
 import { DecodedRefreshTokenDto } from './dto/decoded-refresh-token.dto';
 import { BadRequestError } from 'src/common/error/bad-request.error';
+import { EntityNotFoundError } from 'src/common/error';
 
 @Injectable()
 export class AuthService {
@@ -59,6 +60,8 @@ export class AuthService {
     if (user?.deletedAt != null) {
       await this.userService.restore(user.id);
     }
+
+    if (user == null) throw new EntityNotFoundError('not found user');
   
     const accessToken = await this.createAccessToken(user);
     const refreshToken = await this.createRefreshToken(user);
@@ -78,7 +81,10 @@ export class AuthService {
 
     if (!isExist) throw new BadRequestError('not exist token');
 
-    const user = await this.userService.findByUserId(decodedToken.userId);
+    const user = await this.userService.findByUserId(decodedToken.userId)
+    
+    if (user == null) throw new EntityNotFoundError('not found user');
+
     const accessToken = await this.createAccessToken(user);
 
     return {
